@@ -111,6 +111,7 @@ npm install
 Create .env file:
 DATABASE_URL="your_postgresql_connection_string"
 JWT_SECRET="your_secret_key"
+DIRECT_URL="your_secret_key"
 PORT=5000
 
 bashnpx prisma db push

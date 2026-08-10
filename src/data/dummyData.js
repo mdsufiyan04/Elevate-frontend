@@ -93,7 +93,7 @@ export const sampleProjects = [
     tagline: "React Native version of Elevate for iOS and Android",
     category: "Tech",
     stage: "Idea",
-    admin: { name: "Arjun Sharma", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Arjun", college: "IIT Bombay" },
+    admin: { name: "Yanu", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Arjun", college: "IIT Bombay" },
     roles: [
       { id: 3, title: "React Native Developer", skillsNeeded: "React Native, Expo", filled: false },
       { id: 4, title: "Backend Developer", skillsNeeded: "Node.js, PostgreSQL", filled: false },

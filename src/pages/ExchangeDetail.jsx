@@ -266,52 +266,59 @@ const ExchangeDetail = () => {
           {activeTab === 'overview' && (
             <div className="space-y-8">
               <div>
-                <div className="flex justify-between text-[14px] font-medium text-apple-black mb-2">
+                <div className="flex justify-between text-[14px] font-bold text-apple-black mb-3">
                   <span>Overall Completion</span>
                   <span>{exchange.progress}%</span>
                 </div>
-                <div className="w-full bg-apple-bg border border-apple-border rounded-full h-3 mb-2 overflow-hidden">
-                  <div className="bg-black h-3 rounded-full transition-all" style={{ width: `${exchange.progress}%` }}></div>
+                <div className="w-full bg-[#FBFBFD] border border-apple-border rounded-[980px] h-4 mb-3 overflow-hidden shadow-inner">
+                  <div className="bg-apple-black h-full rounded-[980px] transition-all duration-1000 ease-out" style={{ width: `${exchange.progress}%` }}></div>
                 </div>
-                <p className="text-[14px] text-apple-gray">{exchange.sessionsCompleted} of {exchange.totalSessions} sessions completed</p>
+                <p className="text-[13px] font-semibold uppercase tracking-[0.08em] text-apple-gray">{exchange.sessionsCompleted} <span className="text-apple-border">/</span> {exchange.totalSessions} SESSIONS COMPLETED</p>
               </div>
 
-              <div className="bg-apple-bg border border-apple-border rounded-2xl p-5">
-                <h3 className="font-bold text-apple-black mb-3 flex items-center gap-2">
-                  <Clock className="w-5 h-5 text-apple-black" /> Next Session
+              <div className="bg-[#FBFBFD] border border-apple-border rounded-[24px] p-6 shadow-sm">
+                <h3 className="font-bold text-[19px] text-apple-black mb-4 flex items-center gap-2">
+                  <Clock className="w-5 h-5 text-apple-gray" /> Next Session
                 </h3>
                 {exchange.nextSession || upcomingSession ? (
-                  <div className="space-y-2">
-                    <p className="text-apple-black font-medium">{exchange.nextSession || `${upcomingSession.date} at ${upcomingSession.time}`}</p>
-                    {upcomingSession?.topic && <p className="text-[14px] text-apple-gray">Topic: {upcomingSession.topic}</p>}
+                  <div className="space-y-4">
+                    <div>
+                      <p className="text-[16px] text-apple-black font-semibold">{exchange.nextSession || `${upcomingSession.date} at ${upcomingSession.time}`}</p>
+                      {upcomingSession?.topic && <p className="text-[14px] font-medium text-apple-gray mt-1">Topic: {upcomingSession.topic}</p>}
+                    </div>
                     {upcomingSession?.meetLink && (
-                      <a href={upcomingSession.meetLink} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm text-apple-black hover:underline font-medium">
+                      <a href={upcomingSession.meetLink} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-5 py-2.5 bg-white border border-apple-border rounded-[980px] text-[14px] font-bold text-apple-black hover:bg-apple-bg transition-colors shadow-sm active:scale-95">
                         <Video className="w-4 h-4" /> Join Google Meet <ExternalLink className="w-3 h-3" />
                       </a>
                     )}
                   </div>
                 ) : (
-                  <p className="text-[14px] text-apple-gray">No session scheduled yet.</p>
+                  <p className="text-[15px] font-medium text-apple-gray">No session scheduled currently.</p>
                 )}
                 {!isComplete && (
-                  <button onClick={handleScheduleOpen} className="mt-4 px-6 py-3 bg-black text-white rounded-full text-sm font-medium hover:bg-gray-800 transition">
-                    Schedule Next Session
+                  <button onClick={handleScheduleOpen} className="mt-6 px-6 py-3.5 bg-apple-black text-white rounded-[980px] text-[15px] font-bold hover:bg-[#333333] transition-all active:scale-95 shadow-sm inline-flex items-center gap-2">
+                    <Calendar className="w-4 h-4" /> Schedule New Session
                   </button>
                 )}
               </div>
 
               <div>
-                <h3 className="font-semibold text-apple-black mb-4">Session History</h3>
+                <h3 className="font-bold text-[19px] text-apple-black mb-5 tracking-tight">Session History</h3>
                 {completedSessions.length === 0 ? (
-                  <p className="text-[14px] text-apple-gray">No completed sessions yet.</p>
+                  <p className="text-[15px] font-medium text-apple-gray">No completed sessions yet.</p>
                 ) : (
-                  <div className="space-y-3">
-                    {completedSessions.map(session => (
-                      <div key={session.id} className="flex items-start gap-3 p-4 bg-apple-bg rounded-xl border border-apple-border">
-                        <CheckCircle className="w-5 h-5 text-apple-black mt-0.5 flex-shrink-0" />
-                        <div>
-                          <p className="font-medium text-apple-black">{session.topic}</p>
-                          <p className="text-[12px] text-apple-gray uppercase tracking-[0.08em]">{session.date} at {session.time}</p>
+                  <div className="space-y-4">
+                    {completedSessions.map((session, index) => (
+                      <div key={session.id} className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 bg-white rounded-[20px] border border-apple-border shadow-sm">
+                        <div className="flex items-start gap-4">
+                          <CheckCircle className="w-5 h-5 text-[#34C759] mt-0.5 flex-shrink-0" />
+                          <div>
+                            <p className="font-bold text-[15px] text-apple-black mb-0.5">{session.topic}</p>
+                            <p className="text-[12px] font-bold text-apple-gray uppercase tracking-[0.08em]">Session {index + 1}</p>
+                          </div>
+                        </div>
+                        <div className="text-[13px] font-semibold text-apple-gray sm:text-right border-t sm:border-t-0 sm:border-l border-apple-border pt-3 sm:pt-0 sm:pl-4">
+                          {formatDate(session.date)}
                         </div>
                       </div>
                     ))}

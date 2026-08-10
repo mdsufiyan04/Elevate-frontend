@@ -98,9 +98,9 @@ const Chat = () => {
                     <img src={chatPartner?.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${chatPartner?.username}`} className="w-12 h-12 rounded-full border border-apple-border" alt="" />
                     <div className="flex-1 min-w-0">
                       <div className="flex justify-between items-baseline mb-1">
-                        <h4 className="font-semibold text-apple-black truncate text-[14px]">{chatPartner?.name}</h4>
+                        <h4 className="font-bold text-apple-black truncate text-[15px] tracking-tight">{chatPartner?.name}</h4>
                       </div>
-                      <p className="text-[12px] text-apple-gray uppercase tracking-[0.08em] truncate font-medium">{mySkill} ↔ {theirSkill}</p>
+                      <p className="text-[11px] font-bold text-apple-gray uppercase tracking-[0.08em] truncate">{mySkill} ↔ {theirSkill}</p>
                     </div>
                   </div>
                 );
@@ -124,10 +124,10 @@ const Chat = () => {
                   <button onClick={() => setIsMobileList(true)} className="md:hidden p-2 text-apple-gray hover:text-apple-black rounded-lg">
                     <ArrowLeft className="w-5 h-5" />
                   </button>
-                  <img src={partner?.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${partner?.username}`} className="w-10 h-10 rounded-full border border-apple-border" alt="" />
+                  <img src={partner?.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${partner?.username}`} className="w-12 h-12 rounded-full border border-apple-border" alt="" />
                   <div>
-                    <h3 className="font-semibold text-apple-black text-[17px]">{partner?.name}</h3>
-                    <p className="text-[12px] text-apple-gray uppercase tracking-[0.08em] font-medium mt-1">
+                    <h3 className="font-bold text-apple-black text-[17px] tracking-tight">{partner?.name}</h3>
+                    <p className="text-[12px] font-semibold text-apple-gray uppercase tracking-[0.08em] mt-0.5">
                       Exchange: {selectedExchange.user1Id === user?.id ? selectedExchange.user1Skill : selectedExchange.user2Skill} ↔ {selectedExchange.user1Id === user?.id ? selectedExchange.user2Skill : selectedExchange.user1Skill}
                     </p>
                   </div>
@@ -138,19 +138,19 @@ const Chat = () => {
                 {messages.length === 0 ? (
                   <p className="text-center text-apple-gray text-[14px] py-8">No messages yet. Start the conversation!</p>
                 ) : (
-                  messages.map((msg) => {
+                  messages.map((msg, i) => {
                     const isMe = msg.senderId === user?.id;
                     const sender = msg.senderId === selectedExchange.user1Id ? selectedExchange.user1 : selectedExchange.user2;
                     return (
                       <div key={msg.id} className={`flex gap-3 ${isMe ? 'flex-row-reverse' : 'flex-row'}`}>
-                        {!isMe && (
-                          <img src={sender?.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${sender?.username}`} className="w-8 h-8 rounded-full flex-shrink-0 border border-apple-border" alt="" />
-                        )}
+                        {!isMe ? (
+                          <img src={sender?.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${sender?.username}`} className="w-8 h-8 rounded-full flex-shrink-0 border border-apple-border self-end mb-5" alt="" />
+                        ) : null}
                         <div className={`flex flex-col max-w-[75%] ${isMe ? 'items-end' : 'items-start'}`}>
-                          <div className={`px-5 py-3 rounded-[18px] text-[14px] leading-relaxed ${isMe ? 'bg-apple-black text-white rounded-tr-[4px]' : 'bg-apple-bg border border-apple-border text-apple-black rounded-tl-[4px]'}`}>
+                          <div className={`px-5 py-3 rounded-[20px] text-[15px] font-medium leading-relaxed shadow-sm ${isMe ? 'bg-[#0A84FF] text-white rounded-tr-[4px]' : 'bg-[#FBFBFD] border border-apple-border text-apple-black rounded-tl-[4px]'}`}>
                             {msg.text}
                           </div>
-                          <span className="text-[10px] text-apple-gray uppercase tracking-[0.08em] mt-2 font-medium">{formatTime(msg.createdAt)}</span>
+                          <span className="text-[11px] font-bold text-apple-gray tracking-[0.08em] mt-2">{formatTime(msg.createdAt)}</span>
                         </div>
                       </div>
                     );
@@ -160,22 +160,22 @@ const Chat = () => {
               </div>
 
               <div className="p-4 border-t border-apple-border bg-white rounded-b-[24px]">
-                <div className="flex items-end gap-3">
-                  <button className="p-3 text-apple-gray hover:text-apple-black transition-colors rounded-full hover:bg-apple-bg">
+                <div className="flex items-end gap-3 max-w-4xl mx-auto">
+                  <button className="p-3.5 text-apple-gray hover:text-apple-black transition-colors rounded-full hover:bg-apple-bg active:scale-95">
                     <Paperclip className="w-5 h-5" />
                   </button>
-                  <div className="flex-1 bg-apple-bg border border-apple-border rounded-[18px] px-4 py-2 flex items-center focus-within:border-apple-black transition-colors">
+                  <div className="flex-1 bg-[#FBFBFD] border border-apple-border shadow-sm rounded-[24px] px-5 py-2 flex items-center focus-within:border-black focus-within:ring-4 focus-within:ring-black/5 transition-all">
                     <textarea
-                      placeholder="Type your message..."
-                      className="w-full bg-transparent border-none outline-none resize-none max-h-32 text-[14px] text-apple-black py-2 placeholder-apple-gray"
+                      placeholder="Message..."
+                      className="w-full bg-transparent border-none outline-none resize-none max-h-32 text-[15px] font-medium text-apple-black py-2.5 placeholder-apple-gray"
                       rows="1"
                       value={newMessage}
                       onChange={(e) => setNewMessage(e.target.value)}
                       onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); } }}
                     ></textarea>
                   </div>
-                  <button onClick={handleSend} className="p-4 bg-apple-black text-white rounded-full hover:bg-[#333333] transition-colors flex items-center justify-center">
-                    <Send className="w-5 h-5" />
+                  <button onClick={handleSend} disabled={!newMessage.trim()} className="p-3.5 bg-[#0A84FF] disabled:opacity-50 text-white rounded-full hover:bg-[#007AFF] transition-all active:scale-95 flex items-center justify-center">
+                    <Send className="w-5 h-5 ml-0.5" />
                   </button>
                 </div>
               </div>

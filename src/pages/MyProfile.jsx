@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Star, MapPin, GraduationCap, Calendar, Edit3, Plus, Trash2, X } from 'lucide-react';
+import { Star, MapPin, GraduationCap, Calendar, Edit3, Plus, Trash2, X, ChevronDown } from 'lucide-react';
 import Navbar from '../components/navbar/Navbar';
 import { getMyProfile, addSkill, deleteSkill, updateMyProfile } from '../api/services';
 
@@ -154,28 +154,28 @@ const MyProfile = () => {
         <motion.div initial="hidden" animate="visible" variants={fadeUp} className="bg-white rounded-[24px] p-8 border border-apple-border mb-12">
           {isEditing ? (
             <div className="space-y-6">
-              <h3 className="text-[28px] font-semibold text-apple-black tracking-[-0.01em]">Edit Profile</h3>
+              <h3 className="text-[28px] font-bold text-apple-black tracking-tight">Edit Profile</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-[12px] font-medium text-apple-gray uppercase tracking-[0.08em] mb-2">Name</label>
-                  <input type="text" value={editName} onChange={(e) => setEditName(e.target.value)} className="w-full p-4 bg-apple-bg border border-apple-border rounded-[12px] focus:outline-none focus:border-apple-black text-[14px] transition-all" />
+                  <label className="block text-[13px] font-semibold text-apple-gray uppercase tracking-[0.08em] mb-2">Name</label>
+                  <input type="text" value={editName} onChange={(e) => setEditName(e.target.value)} className="w-full p-4 bg-[#FBFBFD] border border-apple-border rounded-[16px] focus:outline-none focus:border-apple-black focus:ring-4 focus:ring-black/5 text-[15px] font-medium transition-all" />
                 </div>
                 <div>
-                  <label className="block text-[12px] font-medium text-apple-gray uppercase tracking-[0.08em] mb-2">Location</label>
-                  <input type="text" value={editLocation} onChange={(e) => setEditLocation(e.target.value)} className="w-full p-4 bg-apple-bg border border-apple-border rounded-[12px] focus:outline-none focus:border-apple-black text-[14px] transition-all" />
+                  <label className="block text-[13px] font-semibold text-apple-gray uppercase tracking-[0.08em] mb-2">Location</label>
+                  <input type="text" value={editLocation} onChange={(e) => setEditLocation(e.target.value)} className="w-full p-4 bg-[#FBFBFD] border border-apple-border rounded-[16px] focus:outline-none focus:border-apple-black focus:ring-4 focus:ring-black/5 text-[15px] font-medium transition-all" />
                 </div>
                 <div>
-                  <label className="block text-[12px] font-medium text-apple-gray uppercase tracking-[0.08em] mb-2">College</label>
-                  <input type="text" value={editCollege} onChange={(e) => setEditCollege(e.target.value)} className="w-full p-4 bg-apple-bg border border-apple-border rounded-[12px] focus:outline-none focus:border-apple-black text-[14px] transition-all" />
+                  <label className="block text-[13px] font-semibold text-apple-gray uppercase tracking-[0.08em] mb-2">College</label>
+                  <input type="text" value={editCollege} onChange={(e) => setEditCollege(e.target.value)} className="w-full p-4 bg-[#FBFBFD] border border-apple-border rounded-[16px] focus:outline-none focus:border-apple-black focus:ring-4 focus:ring-black/5 text-[15px] font-medium transition-all" />
                 </div>
                 <div className="md:col-span-2">
-                  <label className="block text-[12px] font-medium text-apple-gray uppercase tracking-[0.08em] mb-2">Bio</label>
-                  <textarea value={editBio} onChange={(e) => setEditBio(e.target.value)} className="w-full p-4 bg-apple-bg border border-apple-border rounded-[12px] focus:outline-none focus:border-apple-black text-[14px] h-32 resize-none transition-all" />
+                  <label className="block text-[13px] font-semibold text-apple-gray uppercase tracking-[0.08em] mb-2">Bio</label>
+                  <textarea value={editBio} onChange={(e) => setEditBio(e.target.value)} className="w-full p-4 bg-[#FBFBFD] border border-apple-border rounded-[16px] focus:outline-none focus:border-apple-black focus:ring-4 focus:ring-black/5 text-[15px] font-medium h-32 resize-none transition-all" />
                 </div>
               </div>
               <div className="flex justify-end gap-3 mt-8">
-                <button onClick={() => setIsEditing(false)} className="px-6 py-3 text-apple-gray hover:text-apple-black rounded-[980px] font-medium transition-colors">Cancel</button>
-                <button onClick={handleProfileSave} className="px-6 py-3 bg-apple-black text-white rounded-[980px] font-medium hover:bg-[#333333] transition-colors">Save Changes</button>
+                <button onClick={() => setIsEditing(false)} className="px-8 py-3.5 bg-white border border-apple-border text-apple-black hover:bg-apple-bg rounded-[980px] font-bold text-[15px] transition-colors active:scale-95">Cancel</button>
+                <button onClick={handleProfileSave} className="px-8 py-3.5 bg-apple-black text-white rounded-[980px] font-bold text-[15px] hover:bg-[#333333] transition-colors active:scale-95">Save Changes</button>
               </div>
             </div>
           ) : (
@@ -230,60 +230,68 @@ const MyProfile = () => {
                 {offerSkills.length === 0 && !showOfferForm && <p className="text-[14px] text-apple-gray">No skills offered yet.</p>}
               </div>
               {showOfferForm && (
-                <div className="bg-white p-6 rounded-[18px] border border-apple-border mt-4">
+                <div className="bg-white p-8 rounded-[24px] border border-apple-border mt-4 shadow-sm">
                   <div className="flex justify-between items-center mb-6">
-                    <h4 className="font-semibold text-apple-black">Add Skill to Offer</h4>
-                    <button onClick={resetSkillForm} className="text-apple-gray hover:text-apple-black">
+                    <h4 className="font-bold text-[19px] text-apple-black tracking-tight">Add Skill to Offer</h4>
+                    <button onClick={resetSkillForm} className="text-apple-gray hover:text-apple-black bg-apple-bg hover:bg-[#EAEAEA] p-2 rounded-full transition-colors active:scale-95">
                       <X className="w-5 h-5" />
                     </button>
                   </div>
-                  <div className="space-y-4">
+                  <div className="space-y-5">
                     <div>
-                      <label className="block text-[12px] font-medium text-apple-gray uppercase tracking-[0.08em] mb-2">Skill Name</label>
+                      <label className="block text-[13px] font-semibold text-apple-gray uppercase tracking-[0.08em] mb-2">Skill Name</label>
                       <input
                         type="text"
                         placeholder="e.g. React, Guitar, Spanish"
                         value={skillName}
                         onChange={(e) => setSkillName(e.target.value)}
-                        className="w-full p-3 text-[14px] bg-apple-bg border border-apple-border rounded-[12px] focus:outline-none focus:border-apple-black transition-colors"
+                        className="w-full p-4 text-[15px] bg-[#FBFBFD] border border-apple-border rounded-[16px] focus:outline-none focus:border-apple-black focus:ring-4 focus:ring-black/5 font-medium transition-colors"
                       />
                     </div>
-                    <div>
-                      <label className="block text-[12px] font-medium text-apple-gray uppercase tracking-[0.08em] mb-2">Category</label>
-                      <select
-                        value={category}
-                        onChange={(e) => setCategory(e.target.value)}
-                        className="w-full p-3 text-[14px] bg-apple-bg border border-apple-border rounded-[12px] focus:outline-none focus:border-apple-black appearance-none transition-colors"
-                      >
-                        {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
-                      </select>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-[13px] font-semibold text-apple-gray uppercase tracking-[0.08em] mb-2">Category</label>
+                        <div className="relative group">
+                          <select
+                            value={category}
+                            onChange={(e) => setCategory(e.target.value)}
+                            className="w-full p-4 text-[15px] bg-[#FBFBFD] border border-apple-border rounded-[16px] focus:outline-none focus:border-apple-black focus:ring-4 focus:ring-black/5 appearance-none font-medium text-apple-black transition-colors"
+                          >
+                            {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
+                          </select>
+                          <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-apple-gray pointer-events-none group-focus-within:text-apple-black" />
+                        </div>
+                      </div>
+                      <div>
+                        <label className="block text-[13px] font-semibold text-apple-gray uppercase tracking-[0.08em] mb-2">Level</label>
+                        <div className="relative group">
+                          <select
+                            value={level}
+                            onChange={(e) => setLevel(e.target.value)}
+                            className="w-full p-4 text-[15px] bg-[#FBFBFD] border border-apple-border rounded-[16px] focus:outline-none focus:border-apple-black focus:ring-4 focus:ring-black/5 appearance-none font-medium text-apple-black transition-colors"
+                          >
+                            {LEVELS.map(l => <option key={l} value={l}>{l}</option>)}
+                          </select>
+                          <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-apple-gray pointer-events-none group-focus-within:text-apple-black" />
+                        </div>
+                      </div>
                     </div>
                     <div>
-                      <label className="block text-[12px] font-medium text-apple-gray uppercase tracking-[0.08em] mb-2">Level</label>
-                      <select
-                        value={level}
-                        onChange={(e) => setLevel(e.target.value)}
-                        className="w-full p-3 text-[14px] bg-apple-bg border border-apple-border rounded-[12px] focus:outline-none focus:border-apple-black appearance-none transition-colors"
-                      >
-                        {LEVELS.map(l => <option key={l} value={l}>{l}</option>)}
-                      </select>
-                    </div>
-                    <div>
-                      <label className="block text-[12px] font-medium text-apple-gray uppercase tracking-[0.08em] mb-2">Description (optional)</label>
+                      <label className="block text-[13px] font-semibold text-apple-gray uppercase tracking-[0.08em] mb-2">Description (optional)</label>
                       <input
                         type="text"
                         placeholder="What specifically can you teach or want to learn?"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
-                        className="w-full p-3 text-[14px] bg-apple-bg border border-apple-border rounded-[12px] focus:outline-none focus:border-apple-black transition-colors"
+                        className="w-full p-4 text-[15px] bg-[#FBFBFD] border border-apple-border rounded-[16px] focus:outline-none focus:border-apple-black focus:ring-4 focus:ring-black/5 font-medium transition-colors"
                       />
                     </div>
-                    <div className="flex justify-end gap-2 mt-6">
-                      <button onClick={resetSkillForm} className="px-4 py-2 text-[14px] text-apple-gray hover:text-apple-black rounded-[980px] font-medium transition-colors">
+                    <div className="flex justify-end gap-3 mt-8">
+                      <button onClick={resetSkillForm} className="px-6 py-3.5 text-[15px] font-bold bg-white border border-apple-border hover:bg-apple-bg text-apple-black rounded-[980px] transition-colors active:scale-95">
                         Cancel
                       </button>
-                      <button onClick={() => handleAddSkill('offer')} className="px-4 py-2 text-[14px] bg-apple-black text-white hover:bg-[#333333] rounded-[980px] font-medium transition-colors">
-                        Add Skill
+                      <button onClick={() => handleAddSkill('offer')} className="px-8 py-3.5 text-[15px] font-bold bg-apple-black text-white hover:bg-[#333333] rounded-[980px] transition-colors active:scale-95 flex items-center gap-2">
+                        <Plus className="w-5 h-5" /> Add Skill
                       </button>
                     </div>
                   </div>
@@ -317,60 +325,68 @@ const MyProfile = () => {
                 {wantSkills.length === 0 && !showWantForm && <p className="text-[14px] text-apple-gray">No skills wanted yet.</p>}
               </div>
               {showWantForm && (
-                <div className="bg-white p-6 rounded-[18px] border border-apple-border mt-4">
+                <div className="bg-white p-8 rounded-[24px] border border-apple-border mt-4 shadow-sm">
                   <div className="flex justify-between items-center mb-6">
-                    <h4 className="font-semibold text-apple-black">Add Skill to Want</h4>
-                    <button onClick={resetSkillForm} className="text-apple-gray hover:text-apple-black">
+                    <h4 className="font-bold text-[19px] text-apple-black tracking-tight">Add Skill to Want</h4>
+                    <button onClick={resetSkillForm} className="text-apple-gray hover:text-apple-black bg-apple-bg hover:bg-[#EAEAEA] p-2 rounded-full transition-colors active:scale-95">
                       <X className="w-5 h-5" />
                     </button>
                   </div>
-                  <div className="space-y-4">
+                  <div className="space-y-5">
                     <div>
-                      <label className="block text-[12px] font-medium text-apple-gray uppercase tracking-[0.08em] mb-2">Skill Name</label>
+                      <label className="block text-[13px] font-semibold text-apple-gray uppercase tracking-[0.08em] mb-2">Skill Name</label>
                       <input
                         type="text"
                         placeholder="e.g. React, Guitar, Spanish"
                         value={skillName}
                         onChange={(e) => setSkillName(e.target.value)}
-                        className="w-full p-3 text-[14px] bg-apple-bg border border-apple-border rounded-[12px] focus:outline-none focus:border-apple-black transition-colors"
+                        className="w-full p-4 text-[15px] bg-[#FBFBFD] border border-apple-border rounded-[16px] focus:outline-none focus:border-apple-black focus:ring-4 focus:ring-black/5 font-medium transition-colors"
                       />
                     </div>
-                    <div>
-                      <label className="block text-[12px] font-medium text-apple-gray uppercase tracking-[0.08em] mb-2">Category</label>
-                      <select
-                        value={category}
-                        onChange={(e) => setCategory(e.target.value)}
-                        className="w-full p-3 text-[14px] bg-apple-bg border border-apple-border rounded-[12px] focus:outline-none focus:border-apple-black appearance-none transition-colors"
-                      >
-                        {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
-                      </select>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-[13px] font-semibold text-apple-gray uppercase tracking-[0.08em] mb-2">Category</label>
+                        <div className="relative group">
+                          <select
+                            value={category}
+                            onChange={(e) => setCategory(e.target.value)}
+                            className="w-full p-4 text-[15px] bg-[#FBFBFD] border border-apple-border rounded-[16px] focus:outline-none focus:border-apple-black focus:ring-4 focus:ring-black/5 appearance-none font-medium text-apple-black transition-colors"
+                          >
+                            {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
+                          </select>
+                          <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-apple-gray pointer-events-none group-focus-within:text-apple-black" />
+                        </div>
+                      </div>
+                      <div>
+                        <label className="block text-[13px] font-semibold text-apple-gray uppercase tracking-[0.08em] mb-2">Level</label>
+                        <div className="relative group">
+                          <select
+                            value={level}
+                            onChange={(e) => setLevel(e.target.value)}
+                            className="w-full p-4 text-[15px] bg-[#FBFBFD] border border-apple-border rounded-[16px] focus:outline-none focus:border-apple-black focus:ring-4 focus:ring-black/5 appearance-none font-medium text-apple-black transition-colors"
+                          >
+                            {LEVELS.map(l => <option key={l} value={l}>{l}</option>)}
+                          </select>
+                          <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-apple-gray pointer-events-none group-focus-within:text-apple-black" />
+                        </div>
+                      </div>
                     </div>
                     <div>
-                      <label className="block text-[12px] font-medium text-apple-gray uppercase tracking-[0.08em] mb-2">Level</label>
-                      <select
-                        value={level}
-                        onChange={(e) => setLevel(e.target.value)}
-                        className="w-full p-3 text-[14px] bg-apple-bg border border-apple-border rounded-[12px] focus:outline-none focus:border-apple-black appearance-none transition-colors"
-                      >
-                        {LEVELS.map(l => <option key={l} value={l}>{l}</option>)}
-                      </select>
-                    </div>
-                    <div>
-                      <label className="block text-[12px] font-medium text-apple-gray uppercase tracking-[0.08em] mb-2">Description (optional)</label>
+                      <label className="block text-[13px] font-semibold text-apple-gray uppercase tracking-[0.08em] mb-2">Description (optional)</label>
                       <input
                         type="text"
                         placeholder="What specifically can you teach or want to learn?"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
-                        className="w-full p-3 text-[14px] bg-apple-bg border border-apple-border rounded-[12px] focus:outline-none focus:border-apple-black transition-colors"
+                        className="w-full p-4 text-[15px] bg-[#FBFBFD] border border-apple-border rounded-[16px] focus:outline-none focus:border-apple-black focus:ring-4 focus:ring-black/5 font-medium transition-colors"
                       />
                     </div>
-                    <div className="flex justify-end gap-2 mt-6">
-                      <button onClick={resetSkillForm} className="px-4 py-2 text-[14px] text-apple-gray hover:text-apple-black rounded-[980px] font-medium transition-colors">
+                    <div className="flex justify-end gap-3 mt-8">
+                      <button onClick={resetSkillForm} className="px-6 py-3.5 text-[15px] font-bold bg-white border border-apple-border hover:bg-apple-bg text-apple-black rounded-[980px] transition-colors active:scale-95">
                         Cancel
                       </button>
-                      <button onClick={() => handleAddSkill('want')} className="px-4 py-2 text-[14px] bg-apple-black text-white hover:bg-[#333333] rounded-[980px] font-medium transition-colors">
-                        Add Skill
+                      <button onClick={() => handleAddSkill('want')} className="px-8 py-3.5 text-[15px] font-bold bg-apple-black text-white hover:bg-[#333333] rounded-[980px] transition-colors active:scale-95 flex items-center gap-2">
+                        <Plus className="w-5 h-5" /> Add Skill
                       </button>
                     </div>
                   </div>

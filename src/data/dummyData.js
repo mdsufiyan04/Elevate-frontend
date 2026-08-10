@@ -74,7 +74,7 @@ export const stats = { totalUsers: 2847, totalExchanges: 12490, totalSkills: 384
 export const sampleProjects = [
   {
     id: 1,
-    title: "EcoTrack — Carbon Credit Platform",
+    title: "EcoTrack Carbon Credit Platform",
     tagline: "Helping cities track and trade carbon credits using blockchain",
     category: "Tech",
     stage: "Building",

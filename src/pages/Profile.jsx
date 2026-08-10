@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { MapPin, GraduationCap, Star, Calendar, MessageSquarePlus, X } from 'lucide-react';
+import { MapPin, GraduationCap, Star, Calendar, MessageSquarePlus, X, ChevronDown } from 'lucide-react';
 import Navbar from '../components/navbar/Navbar';
 import { getUserById, sendRequest, getMyProfile } from '../api/services';
 import { useAuth } from '../context/AuthContext';
@@ -93,37 +93,37 @@ const Profile = () => {
   const isOwnProfile = currentUser?.id === profile.id;
 
   return (
-    <div className="min-h-screen bg-white text-apple-black font-sans">
+    <div className="min-h-screen bg-[#FBFBFD] text-apple-black font-sans pb-16">
       <Navbar />
       
       <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
-        <motion.div initial="hidden" animate="visible" variants={fadeUp} className="bg-white rounded-[24px] overflow-hidden border border-apple-border mb-12">
-          <div className="h-48 bg-apple-bg w-full relative"></div>
-          <div className="px-8 pb-8 relative">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
-              <div className="flex flex-col items-start -mt-16 relative z-10">
-                <img src={profile.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${profile.username}`} alt={profile.name} className="w-32 h-32 rounded-full border-4 border-white bg-white mb-4" />
-                <h1 className="text-[32px] font-bold text-apple-black tracking-[-0.01em]">{profile.name}</h1>
-                <p className="text-[17px] text-apple-gray font-medium">@{profile.username}</p>
+        <motion.div initial="hidden" animate="visible" variants={fadeUp} className="bg-white rounded-[32px] overflow-hidden border border-apple-border mb-8 shadow-sm">
+          <div className="h-56 bg-gradient-to-r from-[#E5E5EA] to-[#F2F2F7] w-full relative"></div>
+          <div className="px-8 pb-10 relative">
+            <div className="flex flex-col md:flex-row justify-between items-start gap-8">
+              <div className="flex flex-col items-start -mt-20 relative z-10 w-full md:w-auto">
+                <img src={profile.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${profile.username}`} alt={profile.name} className="w-40 h-40 rounded-full border-[6px] border-white bg-white mb-6 shadow-md" />
+                <h1 className="text-[36px] font-bold text-apple-black tracking-tight leading-none mb-2">{profile.name}</h1>
+                <p className="text-[17px] font-semibold text-apple-gray">@{profile.username}</p>
                 
-                <div className="flex flex-wrap gap-4 mt-4 text-[14px] text-apple-gray">
-                  <div className="flex items-center gap-1"><MapPin className="w-4 h-4" /> {profile.location || 'Not set'}</div>
-                  <div className="flex items-center gap-1"><GraduationCap className="w-4 h-4" /> {profile.college || 'Not set'}</div>
+                <div className="flex flex-wrap items-center gap-4 mt-6 text-[14px] text-apple-black font-medium">
+                  <div className="flex items-center gap-1.5 bg-apple-bg px-4 py-2 rounded-[980px] border border-apple-border"><MapPin className="w-4 h-4 text-apple-gray" /> {profile.location || 'Not set'}</div>
+                  <div className="flex items-center gap-1.5 bg-apple-bg px-4 py-2 rounded-[980px] border border-apple-border"><GraduationCap className="w-4 h-4 text-apple-gray" /> {profile.college || 'Not set'}</div>
                 </div>
               </div>
               
-              <div className="flex flex-col items-end gap-4 w-full md:w-auto">
-                <div className="flex gap-6">
-                  <div className="text-center">
-                    <p className="text-[28px] font-bold text-apple-black flex items-center justify-center gap-1">
-                      {(profile.rating || 0).toFixed(1)} <Star className="w-5 h-5 text-apple-black fill-current" />
+              <div className="flex flex-col items-start md:items-end w-full md:w-auto pt-6">
+                <div className="flex gap-10">
+                  <div className="text-center md:text-right">
+                    <p className="text-[32px] font-bold text-apple-black flex items-center justify-center md:justify-end gap-1.5 tracking-tight">
+                      {(profile.rating || 0).toFixed(1)} <Star className="w-6 h-6 text-apple-black fill-current" />
                     </p>
                     <p className="text-[12px] text-apple-gray uppercase tracking-[0.08em] font-semibold mt-1">{profile.reviewCount || 0} Reviews</p>
                   </div>
-                  <div className="w-px h-12 bg-apple-border"></div>
-                  <div className="text-center">
-                    <p className="text-[28px] font-bold text-apple-black">{profile.completedExchanges || 0}</p>
+                  <div className="w-px h-16 bg-apple-border"></div>
+                  <div className="text-center md:text-left">
+                    <p className="text-[32px] font-bold text-apple-black tracking-tight">{profile.completedExchanges || 0}</p>
                     <p className="text-[12px] text-apple-gray uppercase tracking-[0.08em] font-semibold mt-1">Exchanges</p>
                   </div>
                 </div>
@@ -131,9 +131,9 @@ const Profile = () => {
                   <button 
                     onClick={openRequestModal}
                     disabled={offerSkills.length === 0}
-                    className="w-full md:w-auto px-6 py-3 bg-apple-black text-white rounded-[980px] font-medium hover:bg-[#333333] transition-colors flex items-center justify-center gap-2 mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full md:w-auto px-10 py-4 bg-apple-black text-white rounded-[980px] font-semibold text-[15px] hover:bg-[#333333] active:scale-[0.98] transition-all flex items-center justify-center gap-2 mt-8 disabled:opacity-50 disabled:active:scale-100 disabled:cursor-not-allowed"
                   >
-                    <MessageSquarePlus className="w-5 h-5" /> Request Exchange
+                    <MessageSquarePlus className="w-5 h-5 flex-shrink-0" /> Request Exchange
                   </button>
                 )}
               </div>
@@ -143,36 +143,36 @@ const Profile = () => {
 
         <div className="grid md:grid-cols-3 gap-12">
           {/* Left Column: Bio & Skills */}
-          <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }} className="md:col-span-1 space-y-8">
-            <div className="bg-white rounded-[18px] p-6 border border-apple-border">
-              <h3 className="text-[19px] font-semibold text-apple-black mb-3">About</h3>
-              <p className="text-[14px] text-apple-gray leading-relaxed mb-6">{profile.bio || 'No bio provided.'}</p>
-              <div className="flex items-center gap-2 text-[12px] text-apple-gray uppercase tracking-[0.08em] font-medium border-t border-apple-border pt-4">
+          <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }} className="md:col-span-1 space-y-6">
+            <div className="bg-white rounded-[24px] p-8 border border-apple-border">
+              <h3 className="text-[20px] font-bold text-apple-black mb-4">About</h3>
+              <p className="text-[15px] text-apple-gray leading-relaxed mb-8">{profile.bio || 'No bio provided.'}</p>
+              <div className="flex items-center gap-2 text-[13px] text-apple-gray uppercase tracking-[0.08em] font-semibold border-t border-apple-border pt-6">
                 <Calendar className="w-4 h-4" /> Joined {formatDate(profile.createdAt)}
               </div>
             </div>
 
-            <div className="bg-white rounded-[18px] p-6 border border-apple-border">
-              <h3 className="text-[19px] font-semibold text-apple-black mb-4">Skills Offered</h3>
+            <div className="bg-white rounded-[24px] p-8 border border-apple-border">
+              <h3 className="text-[20px] font-bold text-apple-black mb-6">Skills Offered</h3>
               <div className="flex flex-wrap gap-2">
                 {offerSkills.map((skill) => (
-                  <div key={skill.id} className="px-3 py-1.5 bg-apple-bg border border-apple-border text-apple-black rounded-[980px] text-[14px] font-medium">
-                    {skill.name} <span className="text-[12px] text-apple-gray ml-1 uppercase tracking-[0.08em]">• {skill.level}</span>
+                  <div key={skill.id} className="px-4 py-2 bg-[#0A84FF]/10 text-[#0A84FF] rounded-[980px] text-[14px] font-bold">
+                    {skill.name} <span className="text-[12px] opacity-80 ml-1 uppercase tracking-[0.08em] font-semibold">• {skill.level}</span>
                   </div>
                 ))}
-                {offerSkills.length === 0 && <span className="text-[14px] text-apple-gray">None</span>}
+                {offerSkills.length === 0 && <span className="text-[15px] font-medium text-apple-gray">None</span>}
               </div>
             </div>
 
-            <div className="bg-white rounded-[18px] p-6 border border-apple-border">
-              <h3 className="text-[19px] font-semibold text-apple-black mb-4">Skills Wanted</h3>
+            <div className="bg-white rounded-[24px] p-8 border border-apple-border">
+              <h3 className="text-[20px] font-bold text-apple-black mb-6">Seeking</h3>
               <div className="flex flex-wrap gap-2">
                 {wantSkills.map((skill) => (
-                  <div key={skill.id} className="px-3 py-1.5 bg-white border border-apple-black text-apple-black rounded-[980px] text-[14px] font-medium">
-                    {skill.name} <span className="text-[12px] text-apple-gray ml-1 uppercase tracking-[0.08em]">• {skill.level}</span>
+                  <div key={skill.id} className="px-4 py-2 bg-[#FF9F0A]/10 text-[#FF9F0A] rounded-[980px] text-[14px] font-bold">
+                    {skill.name} <span className="text-[12px] opacity-80 ml-1 uppercase tracking-[0.08em] font-semibold">• {skill.level}</span>
                   </div>
                 ))}
-                {wantSkills.length === 0 && <span className="text-[14px] text-apple-gray">None</span>}
+                {wantSkills.length === 0 && <span className="text-[15px] font-medium text-apple-gray">None</span>}
               </div>
             </div>
           </motion.div>
@@ -217,34 +217,38 @@ const Profile = () => {
 
       {/* Request Modal */}
       {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-          <div className="bg-white rounded-[24px] w-full max-w-md overflow-hidden border border-apple-border">
-            <div className="p-6 border-b border-apple-border flex justify-between items-center">
-              <h3 className="text-[19px] font-semibold text-apple-black">Request Exchange</h3>
-              <button onClick={closeModal} className="text-apple-gray hover:text-apple-black transition-colors">
-                <X className="w-6 h-6" />
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-white/80 backdrop-blur-md" onClick={closeModal}></motion.div>
+          <motion.div initial={{ opacity: 0, scale: 0.95, y: 10 }} animate={{ opacity: 1, scale: 1, y: 0 }} className="bg-white rounded-[32px] w-full max-w-md overflow-hidden border border-apple-border relative z-10 shadow-2xl shadow-black/10">
+            <div className="px-8 py-6 border-b border-apple-border flex justify-between items-center">
+              <h3 className="text-[20px] font-bold text-apple-black tracking-tight">Request Exchange</h3>
+              <button onClick={closeModal} className="text-apple-gray hover:text-apple-black bg-apple-bg hover:bg-[#EAEAEA] p-2 rounded-full transition-colors active:scale-95">
+                <X className="w-5 h-5" />
               </button>
             </div>
-            <div className="p-6 space-y-6">
+            <div className="p-8 space-y-8">
               <div>
-                <label className="block text-[12px] font-medium text-apple-gray uppercase tracking-[0.08em] mb-2">Skill being requested</label>
+                <label className="block text-[13px] font-semibold text-apple-gray uppercase tracking-[0.08em] mb-3">Skill being requested</label>
                 {offerSkills.length > 1 ? (
-                  <select
-                    className="w-full bg-apple-bg border border-apple-border rounded-[12px] p-4 text-[14px] text-apple-black focus:border-apple-black outline-none appearance-none"
-                    value={selectedSkill?.id || ''}
-                    onChange={(e) => {
-                      const skill = offerSkills.find(s => s.id === parseInt(e.target.value));
-                      setSelectedSkill(skill || null);
-                    }}
-                  >
-                    <option value="">Select a skill...</option>
-                    {offerSkills.map(s => (
-                      <option key={s.id} value={s.id}>{s.name} ({s.level})</option>
-                    ))}
-                  </select>
+                  <div className="relative group">
+                    <select
+                      className="w-full bg-[#FBFBFD] border border-apple-border rounded-[20px] py-4 px-5 text-[15px] text-apple-black focus:border-apple-black focus:ring-4 focus:ring-black/5 outline-none appearance-none transition-all font-medium shadow-sm cursor-pointer"
+                      value={selectedSkill?.id || ''}
+                      onChange={(e) => {
+                        const skill = offerSkills.find(s => s.id === parseInt(e.target.value));
+                        setSelectedSkill(skill || null);
+                      }}
+                    >
+                      <option value="">Select a skill...</option>
+                      {offerSkills.map(s => (
+                        <option key={s.id} value={s.id}>{s.name} ({s.level})</option>
+                      ))}
+                    </select>
+                    <ChevronDown className="absolute right-5 top-1/2 -translate-y-1/2 w-5 h-5 text-apple-gray pointer-events-none group-focus-within:text-apple-black transition-colors" />
+                  </div>
                 ) : (
-                  <div className="bg-apple-bg border border-apple-border rounded-[12px] p-4">
-                    <p className="text-[17px] font-semibold text-apple-black">
+                  <div className="bg-[#FBFBFD] border border-apple-border rounded-[20px] p-5 shadow-sm">
+                    <p className="text-[17px] font-bold text-apple-black">
                       {selectedSkill?.name || offerSkills[0]?.name || 'No skills available'}
                     </p>
                   </div>
@@ -252,25 +256,35 @@ const Profile = () => {
               </div>
 
               <div>
-                <label className="block text-[12px] font-medium text-apple-gray uppercase tracking-[0.08em] mb-2">Message</label>
+                <label className="block text-[13px] font-semibold text-apple-gray uppercase tracking-[0.08em] mb-3">Intro Message</label>
                 <textarea 
                   rows="4" 
-                  className="w-full bg-apple-bg border border-apple-border rounded-[12px] p-4 text-[14px] text-apple-black focus:border-apple-black outline-none resize-none transition-colors"
+                  className="w-full bg-[#FBFBFD] border border-apple-border rounded-[20px] p-5 text-[15px] text-apple-black focus:border-apple-black focus:ring-4 focus:ring-black/5 outline-none resize-none transition-all shadow-sm placeholder-apple-gray"
                   placeholder={`Hi ${profile.name}, I'd love to learn from you!`}
                   value={message}
                   onChange={e => setMessage(e.target.value)}
                 ></textarea>
               </div>
 
-              <button 
-                onClick={() => handleSendRequest(selectedSkill || offerSkills[0])}
-                disabled={requesting || offerSkills.length === 0}
-                className="w-full py-4 bg-apple-black text-white rounded-[980px] font-medium hover:bg-[#333333] transition-colors disabled:opacity-50"
-              >
-                {requesting ? 'Sending...' : 'Confirm Request'}
-              </button>
+              <div className="pt-2">
+                <button 
+                  onClick={() => handleSendRequest(selectedSkill || offerSkills[0])}
+                  disabled={requesting || offerSkills.length === 0}
+                  className="w-full py-4 bg-apple-black text-white rounded-[980px] font-semibold text-[16px] hover:bg-[#333333] active:scale-[0.98] transition-all disabled:opacity-70 disabled:active:scale-100 flex items-center justify-center min-h-[56px]"
+                >
+                  {requesting ? (
+                    <div className="flex items-center gap-2">
+                      <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      <span>Sending...</span>
+                    </div>
+                  ) : 'Send Match Request'}
+                </button>
+              </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       )}
     </div>
